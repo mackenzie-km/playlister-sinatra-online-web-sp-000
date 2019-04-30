@@ -1,6 +1,6 @@
 class Song < ActiveRecord::Base
   belongs_to :artist
-  has_and_belongs_to_many :genres, join_table: "songs_genres"
+  has_and_belongs_to_many :genres, join_table: "song_genres"
 
   def slug
     self.name.gsub(" ", "-").downcase
@@ -10,4 +10,6 @@ class Song < ActiveRecord::Base
     found = slug_name.gsub("-", " ").titleize
     self.find_by(name: found)
   end
+
+
 end
