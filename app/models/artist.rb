@@ -7,7 +7,7 @@ class Artist < ActiveRecord::Base
   end
 
   def self.find_by_slug(slug_name)
-    found = slug_name.gsub("-", " ").titleize
-    self.find_by(name: found)
+    normalized = slug_name.gsub("-", " ").downcase
+    self.where("lower(name) = ?", normalized).first
   end
 end

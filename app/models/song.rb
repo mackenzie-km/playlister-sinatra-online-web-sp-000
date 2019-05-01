@@ -8,9 +8,8 @@ class Song < ActiveRecord::Base
   end
 
   def self.find_by_slug(slug_name)
-    found = slug_name.gsub("-", " ").downcase
-    self.find_by(:name => ['name LIKE ?', found])
-    #need to keep working on lowercase!!!!
+    normalized = slug_name.gsub("-", " ").downcase
+    self.where("lower(name) = ?", normalized).first
   end
 
 
