@@ -1,8 +1,23 @@
-<form action="/songs" method="POST">
-  <input type="text" id="name" name="name">
-  <input type="text" id="artist_name" name="artist_name">
-  <label for="<%= genre.name %>"> Genres: </label>
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
+<h1> Create a new song </h1>
+  <form action="/songs" method="POST">
+
+  <label for="song[name]">Name</label><br>
+  <input type="text" id="song[name]" name="songs[name]"><br><br>
+
+  <label for="artist[name]">Artist Name</label><br>
+  <input type="text" id="artist[name]" name="artists[name]"><br><br>
+
+  Genre Name:<br>
     <% Genre.all.each do |genre| %>
-      <input id="<%= genre.name %>" type="checkbox" name="genres[]" value="<%= genre.id %>">
-    <% end %>
-</form>
+      <%= "#{genre.name.capitalize}:" %>
+      <input id="<%=genre.name%>" type="checkbox" name="genres[]" value="<%=genre.id%>"><br>
+    <% end %><br><br>
+
+  <input type="submit" id="Create" name="submit">
+</form><br><br>
+
+  <a href="/">HOME</a>
