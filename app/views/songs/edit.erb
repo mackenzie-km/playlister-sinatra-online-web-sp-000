@@ -3,10 +3,10 @@
 <% end %>
 
 <h1> Edit Song </h1>
-<h2> Song name: <%= @song.name %> </h2>
-<h2> Song artist: <%= @song.artist.name %> </h2>
+<h2> Song name: <%= @song.name %></h2>
+<h2> Song artist: <%=@song.artist.name%></h2>
 <h2> Song genres: <ul><% @song.genres.each do |genre| %>
-  <li><%= genre.name.titleize %></li>
+  <li><%= genre.name %></li>
   <% end %></ul>
  </h2><br><br>
 
@@ -18,7 +18,7 @@
 
   Genre Name:<br>
     <% Genre.all.each do |genre| %>
-      <%= "#{genre.name.capitalize}:" %>
+      <%= "#{genre.name}:" %>
       <input id="<%=genre.name%>" type="checkbox" name="genres[]" value="<%=genre.id%>"><br>
     <% end %><br><br>
 
