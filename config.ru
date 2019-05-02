@@ -23,7 +23,6 @@
 # use SongsController
 # run ApplicationController
 
-
 require './config/environment'
 
 # if ActiveRecord::Migrator.needs_migration?
