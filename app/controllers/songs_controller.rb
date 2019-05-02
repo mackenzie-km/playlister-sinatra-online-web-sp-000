@@ -36,10 +36,10 @@ class SongsController < ApplicationController
 
     if @song.save
       flash[:message] = "Successfully created song."
-      redirect to "/songs/#{@song.slug}"
+      redirect("/songs/#{@song.slug}")
     else
       flash[:message] = "Error - try again."
-      redirect to "/songs/new"
+      redirect("/songs/new")
     end
   end
 
@@ -49,24 +49,22 @@ class SongsController < ApplicationController
   end
 
   patch '/songs/:slug' do
+
     @song = Song.find_by_slug(params[:slug])
-    @song.update(params[:song])
-    @song.artist = Artist.find_or_create_by(name: params[:artist][:name])
-    # artist = Artist.find_by_slug(params[:artists][:name].gsub(" ", "-").downcase)
-    # if !artist
-    #   artist = Artist.create(params[:artists])
-    # end
-    # = artist
+    artist = Artist.find_by_slug(params[:artist][:name].gsub(" ", "-").downcase)
+    if !artist
+      artist = Artist.create(params[:artist])
+    end
+    @song.artist = artist
 
-    # if (params[:genres] != nil) && (params[:genres] != @song.genres.collect {|genre| genre.id.to_s})
-    #     @song.genres.clear!
-    #   params[:genres].each do |genre|
-    #     @song.genres << Genre.find(genre)
-    #     @song.save
-    #   end
-    # end
+    if params[:genres] != nil
+        @song.genres.clear
+      params[:genres].each do |genre|
+        @song.genres << Genre.find(genre)
+        @song.save
+      end
+    end
 
-    @song.genre_ids = params[:genres]
     @song.save
 
     flash[:message] = "Successfully updated song."

@@ -1,24 +1,23 @@
-<% if flash.has?(:message) %>
-  <%= flash[:message] %>
-<% end %>
+
 
 <h1> Edit Song </h1>
-<h2> Song name: <%= @song.name %></h2>
-<h2> Song artist: <%=@song.artist.name%></h2>
-<h2> Song genres: <ul><% @song.genres.each do |genre| %>
-  <li><%= genre.name %></li>
-  <% end %></ul>
+<h2> Song name: <%= @song.name %> </h2>
+<h2> Song artist: <%=@song.artist.name%> </h2>
+<h2> Song genres: <% @song.genres.each do |genre| %>
+  <%= genre.name %>
+  <% end %>
  </h2><br><br>
 
   <form action="<%="/songs/#{@song.slug}"%>" method="POST">
     <input id="hidden" type="hidden" name="_method" value="patch">
+      <!-- corrected: name is for nested structure, id for labels & capybara -->
 
-  <label for="artist[name]">Artist Name</label><br>
-  <input type="text" id="artist[name]" name="artists[name]"><br><br>
+    <label for="artist_name">Artist Name</label><br>
+    <input type="text" name="artist[name]" id="artist_name"><br><br>
 
   Genre Name:<br>
     <% Genre.all.each do |genre| %>
-      <%= "#{genre.name}:" %>
+      <label><%= genre.name %></label> <!-- can make this into a label -->
       <input id="<%=genre.name%>" type="checkbox" name="genres[]" value="<%=genre.id%>"><br>
     <% end %><br><br>
 
