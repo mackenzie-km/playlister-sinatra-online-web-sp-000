@@ -11,6 +11,7 @@
   <form action="<%="/songs/#{@song.slug}"%>" method="POST">
     <input id="hidden" type="hidden" name="_method" value="patch">
       <!-- corrected: name is for nested structure, id for labels & capybara -->
+      <!-- sometimes capybara looks for value; read specs carefully -->
 
     <label for="artist_name">Artist Name</label><br>
     <input type="text" name="artist[name]" id="artist_name" value="<%=@song.artist.name%>"><br><br>
