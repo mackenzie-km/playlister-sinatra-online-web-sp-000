@@ -13,7 +13,7 @@
       <!-- corrected: name is for nested structure, id for labels & capybara -->
 
     <label for="artist_name">Artist Name</label><br>
-    <input type="text" name="artist[name]" id="artist_name"><br><br>
+    <input type="text" name="artist[name]" id="artist_name" value="<%=@song.artist.name%>"><br><br>
 
   Genre Name:<br>
     <% Genre.all.each do |genre| %>
